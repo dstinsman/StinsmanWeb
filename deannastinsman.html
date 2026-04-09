@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Deanna Stinsman – Tampa Bay Realtor</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --brand: #5888AA;
+      --accent: #A8A5FA;
+      --muted: #f5f7fa;
+      --text: #222;
+      --card: #fff;
+      --header-overlay: rgba(0,0,0,0.3);
+      --shadow: rgba(0,0,0,0.08);
+      --shadow-hover: rgba(88,136,170,0.15);
+    }
+
+    [data-theme="dark"] {
+      --muted: #1a1a1a;
+      --text: #e8e8e8;
+      --card: #2a2a2a;
+      --header-overlay: rgba(0,0,0,0.5);
+      --shadow: rgba(0,0,0,0.3);
+      --shadow-hover: rgba(168,165,250,0.2);
+    }
+
+    * { 
+      box-sizing: border-box; 
+      margin: 0; 
+      padding: 0; 
+    }
+    
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      color: var(--text);
+      background: var(--muted);
+      scroll-behavior: smooth;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header */
+    header {
+      height: 20vh;
+      min-height: 350px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+      position: relative;
+      overflow: hidden;
+      background: url('images/deannaRealtor02.png') center/cover no-repeat;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--header-overlay);
+      animation: pulse 8s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
+    }
+
+    header h1 {
+      position: relative;
+      z-index: 1;
+      margin: 0 0 1rem 0 !important;
+      padding: 0 !important;
+      font-size: 2.8rem;
+      font-weight: 700;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.7);
+    }
+
+    header p {
+      position: relative;
+      z-index: 1;
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin: 0 1rem !important;
+      padding: 0 !important;
+      opacity: 0.95;
+    }
+
+    /* Navigation */
+    nav {
+      background: var(--card);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      padding: 1rem;
+      box-shadow: 0 2px 10px var(--shadow);
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      transition: background 0.3s ease;
+    }
+
+    nav a {
+      color: var(--brand);
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 0.2s ease, transform 0.2s ease;
+      position: relative;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: width 0.3s ease;
+    }
+
+    nav a:hover {
+      color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    /* Dark Mode Toggle */
+    .theme-toggle {
+      margin-left: 1rem;
+      background: var(--brand);
+      color: white;
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px var(--shadow);
+    }
+
+    .theme-toggle:hover {
+      background: var(--accent);
+      transform: rotate(180deg) scale(1.1);
+      box-shadow: 0 4px 12px var(--shadow-hover);
+    }
+
+    .theme-toggle:active {
+      transform: rotate(180deg) scale(0.95);
+    }
+
+    /* Main Content */
+    main {
+      flex: 1;
+      max-width: 1400px;
+      margin: 3rem auto;
+      padding: 0 2rem;
+      width: 100%;
+    }
+
+    .intro {
+      background: var(--card);
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 3rem;
+      box-shadow: 0 10px 30px var(--shadow);
+      border: 1px solid rgba(88,136,170,0.1);
+      transition: all 0.3s ease;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.6s ease forwards;
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .intro h2 {
+      color: var(--brand);
+      margin: 0 0 1rem 0;
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
+
+    .intro p {
+      line-height: 1.7;
+      color: var(--text);
+      opacity: 0.85;
+      margin-bottom: 1rem;
+    }
+
+    .intro p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Services Section */
+    .services-section {
+      margin: 4rem 0;
+    }
+
+    .services-section h2 {
+      color: var(--brand);
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .service-card {
+      background: var(--card);
+      padding: 2rem;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px var(--shadow);
+      transition: all 0.3s ease;
+      border: 1px solid rgba(88,136,170,0.1);
+    }
+
+    .service-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px var(--shadow-hover);
+    }
+
+    .service-card i {
+      font-size: 2.5rem;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .service-card h3 {
+      color: var(--brand);
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .service-card p {
+      color: var(--text);
+      opacity: 0.85;
+      line-height: 1.7;
+    }
+
+    /* Approach Section */
+    .approach-section {
+      background: var(--card);
+      border-radius: 16px;
+      padding: 3rem 2rem;
+      box-shadow: 0 10px 30px var(--shadow);
+      border: 1px solid rgba(88,136,170,0.1);
+      margin: 3rem 0;
+    }
+
+    .approach-section h2 {
+      color: var(--brand);
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .approach-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .approach-item {
+      padding: 1.5rem;
+    }
+
+    .approach-item h3 {
+      color: var(--accent);
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .approach-item h3 i {
+      font-size: 1.5rem;
+    }
+
+    .approach-item p {
+      color: var(--text);
+      opacity: 0.85;
+      line-height: 1.7;
+    }
+
+    /* Contact Section */
+    .contact-section {
+      background: linear-gradient(135deg, var(--brand), var(--accent));
+      border-radius: 16px;
+      padding: 3rem 2rem;
+      text-align: center;
+      color: white;
+      margin: 3rem 0;
+      box-shadow: 0 10px 30px var(--shadow);
+    }
+
+    .contact-section h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .contact-section p {
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+      opacity: 0.95;
+    }
+
+    .contact-info {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+
+    .contact-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .contact-item i {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .contact-item strong {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      opacity: 0.9;
+    }
+
+    .contact-item a {
+      color: white;
+      text-decoration: none;
+      font-size: 1.2rem;
+      font-weight: 600;
+      transition: opacity 0.3s ease;
+    }
+
+    .contact-item a:hover {
+      opacity: 0.8;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 3rem 1.5rem;
+      color: var(--text);
+      background: var(--card);
+      margin-top: 4rem;
+      border-top: 1px solid rgba(88,136,170,0.1);
+      transition: background 0.3s ease, color 0.3s ease;
+      opacity: 0.8;
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      header {
+        min-height: 250px;
+      }
+
+      header h1 {
+        font-size: 2rem;
+      }
+
+      header p {
+        font-size: 1rem;
+      }
+
+      main {
+        padding: 0 1rem;
+        margin: 2rem auto;
+      }
+
+      nav {
+        gap: 1rem;
+        padding: 0.8rem;
+        flex-wrap: wrap;
+      }
+
+      .theme-toggle {
+        margin-left: 0;
+      }
+
+      .services-grid,
+      .approach-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-info {
+        flex-direction: column;
+        gap: 2rem;
+      }
+
+      .approach-section,
+      .contact-section {
+        padding: 2rem 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Deanna Stinsman</h1>
+    <p>Your Trusted Guide to Tampa Bay Real Estate</p>
+  </header>
+
+  <nav>
+    <a href="Stinsman.html">Home</a>
+    <a href="projects.html">Projects</a>
+    <a href="pml.html">Private Lending</a>
+    <a href="buybox.html">Buy Box</a>
+    <a href="Stinsman.html#contact">Contact</a>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+      <i class="fas fa-moon"></i>
+    </button>
+  </nav>
+
+  <main>
+    <div class="intro">
+      <h2>Experience You Can Trust</h2>
+      <p>
+        With extensive experience helping clients throughout the Tampa Bay area, I bring a depth of knowledge 
+        and genuine care to every transaction. Whether you're buying your first home, selling a cherished property, 
+        or searching for your next investment, I'm here to guide you through every step of the process.
+      </p>
+      <p>
+        Real estate is more than just transactions—it's about people, dreams, and finding the right fit for your 
+        unique situation. I take pride in treating every client with integrity, patience, and the kind of personalized 
+        attention that makes the journey enjoyable and successful.
+      </p>
+      <p>
+        My clients know they can ask me anything. I believe in education and empowerment, ensuring you feel confident 
+        and informed as we navigate the market together.
+      </p>
+    </div>
+
+    <div class="services-section">
+      <h2>How I Can Help</h2>
+      <div class="services-grid">
+        <div class="service-card">
+          <i class="fas fa-home"></i>
+          <h3>Home Buyers</h3>
+          <p>
+            From first-time buyers to seasoned homeowners, I'll help you navigate the Tampa Bay market with confidence. 
+            Together, we'll find the perfect home that fits your lifestyle, budget, and future goals.
+          </p>
+        </div>
+        <div class="service-card">
+          <i class="fas fa-key"></i>
+          <h3>Home Sellers</h3>
+          <p>
+            Selling your home is a significant decision. I provide strategic marketing, expert pricing guidance, 
+            and skilled negotiation to ensure your property stands out and achieves the best possible outcome.
+          </p>
+        </div>
+        <div class="service-card">
+          <i class="fas fa-map-marked-alt"></i>
+          <h3>Market Expertise</h3>
+          <p>
+            With deep knowledge of neighborhoods across Tampa Bay, I offer insights on market trends, property values, 
+            and community features to help you make informed decisions.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="approach-section">
+      <h2>My Approach</h2>
+      <div class="approach-grid">
+        <div class="approach-item">
+          <h3><i class="fas fa-graduation-cap"></i> Education First</h3>
+          <p>
+            I believe knowledge is power. I take the time to explain every aspect of the buying or selling process, 
+            ensuring you understand your options and feel confident in your decisions. No question is too small, 
+            and no concern is overlooked.
+          </p>
+        </div>
+        <div class="approach-item">
+          <h3><i class="fas fa-handshake"></i> Built on Integrity</h3>
+          <p>
+            Honesty and transparency are at the core of everything I do. You can count on me to provide straightforward 
+            answers, realistic expectations, and unwavering support throughout your real estate journey.
+          </p>
+        </div>
+        <div class="approach-item">
+          <h3><i class="fas fa-user-check"></i> Personalized Service</h3>
+          <p>
+            Every client is unique, and so is every transaction. I tailor my approach to your specific needs, timeline, 
+            and goals, ensuring a smooth and personalized experience from start to finish.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-section">
+      <h2>Let's Get Started</h2>
+      <p>Ready to buy or sell? Have questions about the Tampa Bay market? I'm here to help.</p>
+      <div class="contact-info">
+        <div class="contact-item">
+          <i class="fas fa-phone"></i>
+          <strong>Phone</strong>
+          <a href="tel:8134746091">813-474-6091</a>
+        </div>
+        <div class="contact-item">
+          <i class="fas fa-envelope"></i>
+          <strong>Email</strong>
+          <a href="mailto:deanna@stinsman.com">deanna@stinsman.com</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    © 2025 Deanna Stinsman — Your trusted Tampa Bay real estate partner
+  </footer>
+
+  <script>
+    // Dark Mode Toggle
+    const themeToggle = document.getElementById('themeToggle');
+    const html = document.documentElement;
+    const icon = themeToggle.querySelector('i');
+
+    // Check for saved theme preference or default to light mode
+    const currentTheme = localStorage.getItem('theme') || 'light';
+    html.setAttribute('data-theme', currentTheme);
+    icon.className = currentTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = html.getAttribute('data-theme');
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+      
+      html.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      icon.className = newTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buy Box</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap');
+        
+        :root {
+            --brand: #5888AA;
+            --accent: #A8A5FA;
+            --muted: #f5f7fa;
+            --text: #222;
+            --card: #fff;
+            --header-overlay: rgba(0,0,0,0.3);
+            --shadow: rgba(0,0,0,0.08);
+            --shadow-hover: rgba(88,136,170,0.15);
+            --blueprint-bg: #1a2332;
+            --blueprint-border: #4a7ba7;
+            --blueprint-text: #c8dae8;
+            --blueprint-text-muted: #7a9bb8;
+        }
+
+        [data-theme="dark"] {
+            --muted: #1a1a1a;
+            --text: #e8e8e8;
+            --card: #2a2a2a;
+            --header-overlay: rgba(0,0,0,0.5);
+            --shadow: rgba(0,0,0,0.3);
+            --shadow-hover: rgba(168,165,250,0.2);
+            --blueprint-bg: #0d1621;
+            --blueprint-border: #5a8aaa;
+            --blueprint-text: #d8eaf8;
+            --blueprint-text-muted: #8fa9bf;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Architects Daughter', cursive;
+            background: var(--muted);
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+        
+        /* Header */
+        header {
+            background-image: url('images/bg_bb_map02.png');
+            background-size: cover;
+            background-position: center;
+            height: 20vh;
+            min-height: 350px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            border-bottom: 3px solid #4a7ba7;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+			background: var(--header-overlay);
+            animation: pulse 8s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+        
+        header h1 {
+            position: relative;
+            z-index: 1;
+            color: #c8dae8;
+            font-size: 2.8rem;
+            margin: 0 0 1rem 0;
+            letter-spacing: 3px;
+            text-shadow: 0 2px 20px rgba(0,0,0,0.7);
+            font-weight: 700;
+            font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
+            color: white;
+        }
+        
+        header p {
+            position: relative;
+            z-index: 1;
+            color: #a8c5dd;
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 1rem;
+            opacity: 0.95;
+            font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            color: white;			
+        }
+        
+        /* Navigation */
+        nav {
+            background: var(--card);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            padding: 1rem;
+            box-shadow: 0 2px 10px var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 200;
+            transition: background 0.3s ease;
+        }
+        
+        nav a {
+            color: var(--brand);
+            font-weight: 600;
+            text-decoration: none;
+            transition: color 0.2s ease, transform 0.2s ease;
+            font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            position: relative;
+        }
+        
+        /* Underline animation */
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+        
+        nav a:hover {
+            color: var(--accent);
+            transform: translateY(-2px);
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        /* Dark Mode Toggle */
+        .theme-toggle {
+            margin-left: 1rem;
+            background: var(--brand);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px var(--shadow);
+        }
+
+        .theme-toggle:hover {
+            background: var(--accent);
+            transform: rotate(180deg) scale(1.1);
+            box-shadow: 0 4px 12px var(--shadow-hover);
+        }
+
+        .theme-toggle:active {
+            transform: rotate(180deg) scale(0.95);
+        }
+        
+        /* Main content wrapper */
+        main {
+            flex: 1;
+            padding: 20px;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 1.5rem;
+            color: var(--text);
+            background: var(--card);
+            margin-top: 4rem;
+            border-top: 1px solid #e4e7ec;
+            font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+        
+        .blueprint-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: var(--blueprint-bg);
+            background-image: 
+                linear-gradient(rgba(74, 123, 167, 0.15) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(74, 123, 167, 0.15) 1px, transparent 1px);
+            background-size: 20px 20px;
+            padding: 50px;
+            box-shadow: 
+                0 15px 50px rgba(0,0,0,0.5),
+                inset 0 0 150px rgba(0,0,0,0.2);
+            border: 2px solid #0d1621;
+            position: relative;
+            transition: background 0.3s ease;
+        }
+        
+        /* Weathered paper texture */
+        .blueprint-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(255,255,255,0.02) 2px, transparent 2px),
+                radial-gradient(circle at 70% 60%, rgba(0,0,0,0.15) 3px, transparent 3px),
+                radial-gradient(circle at 45% 80%, rgba(0,0,0,0.1) 2px, transparent 3px);
+            pointer-events: none;
+            opacity: 0.6;
+        }
+        
+        .blueprint-header {
+            border-bottom: 2px solid var(--blueprint-border);
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .title-block {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+        }
+        
+        .title-info {
+            border: 2px solid var(--blueprint-border);
+            padding: 15px;
+            background: rgba(74, 123, 167, 0.03);
+        }
+        
+        .project-title {
+            color: var(--blueprint-text);
+            font-size: 28px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+        
+        .subtitle {
+            color: var(--blueprint-text-muted);
+            font-size: 18px;
+        }
+        
+        .approval-block {
+            border: 2px solid var(--blueprint-border);
+            padding: 10px;
+            background: rgba(74, 123, 167, 0.03);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .approval-line {
+            color: var(--blueprint-text-muted);
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        
+        .house-plan {
+            position: relative;
+            margin: 30px auto;
+            max-width: 900px;
+        }
+        
+        /* Main house structure */
+        .house-outline {
+            border: 3px solid var(--blueprint-border);
+            position: relative;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 220px 180px 220px;
+            gap: 0;
+            background: rgba(26, 35, 50, 0.5);
+        }
+        
+        /* Individual rooms */
+        .room {
+            border: 2px solid var(--blueprint-border);
+            padding: 20px;
+            position: relative;
+            background: rgba(26, 35, 50, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Doorways */
+        .doorway {
+            position: absolute;
+            background: var(--blueprint-bg);
+            z-index: 5;
+        }
+        
+        .doorway-horizontal {
+            width: 40px;
+            height: 4px;
+        }
+        
+        .doorway-vertical {
+            width: 4px;
+            height: 40px;
+        }
+        
+        .door-top {
+            top: -2px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .door-bottom {
+            bottom: -2px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .door-left {
+            left: -2px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        .door-right {
+            right: -2px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        /* Door swing arcs */
+        .door-swing {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--blueprint-border);
+            border-radius: 50%;
+        }
+        
+        .swing-tl {
+            top: -2px;
+            left: calc(50% - 20px);
+            border-right: none;
+            border-bottom: none;
+        }
+        
+        .swing-tr {
+            top: -2px;
+            left: calc(50% - 20px);
+            border-left: none;
+            border-bottom: none;
+        }
+        
+        .swing-bl {
+            bottom: -2px;
+            left: calc(50% - 20px);
+            border-right: none;
+            border-top: none;
+        }
+        
+        .swing-br {
+            bottom: -2px;
+            left: calc(50% - 20px);
+            border-left: none;
+            border-top: none;
+        }
+        
+        /* Fixtures */
+        .fixture {
+            position: absolute;
+            border: 2px solid var(--blueprint-border);
+        }
+        
+        .sink {
+            width: 25px;
+            height: 20px;
+            border-radius: 8px;
+            background: transparent;
+        }
+        
+        .stove {
+            width: 30px;
+            height: 30px;
+            background: transparent;
+        }
+        
+        .stove::before {
+            content: '';
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            width: 8px;
+            height: 8px;
+            border: 1px solid var(--blueprint-border);
+            border-radius: 50%;
+        }
+        
+        .stove::after {
+            content: '';
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            width: 8px;
+            height: 8px;
+            border: 1px solid var(--blueprint-border);
+            border-radius: 50%;
+        }
+        
+        .toilet {
+            width: 20px;
+            height: 25px;
+            border-radius: 40% 40% 20% 20%;
+            background: transparent;
+        }
+        
+        .tub {
+            width: 60px;
+            height: 30px;
+            border-radius: 5px;
+            background: transparent;
+        }
+        
+        .closet {
+            border: 2px solid var(--blueprint-border);
+            background: transparent;
+            position: absolute;
+        }
+        
+        .closet::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 1px;
+            height: 100%;
+            background: var(--blueprint-border);
+        }
+        
+        /* Room content */
+        .room-content {
+            color: var(--blueprint-text);
+            font-size: 20px;
+            line-height: 1.8;
+            text-align: center;
+            z-index: 1;
+        }
+        
+        .criteria-item {
+            margin: 8px 0;
+        }
+        
+        /* Dimensions */
+        .dimension {
+            position: absolute;
+            color: var(--blueprint-text-muted);
+            font-size: 14px;
+        }
+        
+        .dim-top {
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .dim-left {
+            left: -60px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        .dim-right {
+            right: -60px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        .dim-bottom {
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        /* North arrow */
+        .north-arrow {
+            position: absolute;
+            top: -100px;
+            right: 20px;
+            width: 80px;
+            height: 80px;
+        }
+        
+        .arrow-circle {
+            width: 80px;
+            height: 80px;
+            border: 2px solid var(--blueprint-border);
+            border-radius: 50%;
+            position: relative;
+            background: rgba(26, 35, 50, 0.5);
+        }
+        
+        .arrow-circle::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 1px;
+            height: 80%;
+            background: var(--blueprint-border);
+            transform: translate(-50%, -50%);
+        }
+        
+        .arrow-circle::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 80%;
+            height: 1px;
+            background: var(--blueprint-border);
+            transform: translate(-50%, -50%);
+        }
+        
+        .arrow-pointer {
+            position: absolute;
+            top: 6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 12px solid transparent;
+            border-right: 12px solid transparent;
+            border-bottom: 24px solid #a8c5dd;
+            z-index: 2;
+        }
+        
+        .arrow-pointer::after {
+            content: '';
+            position: absolute;
+            top: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 12px solid transparent;
+            border-right: 12px solid transparent;
+            border-top: 24px solid #5a7a98;
+        }
+        
+        .arrow-n {
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 14px;
+            color: var(--blueprint-bg);
+            font-weight: bold;
+            z-index: 3;
+        }
+        
+        .compass-letters {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .compass-e {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 11px;
+            color: var(--blueprint-text-muted);
+        }
+        
+        .compass-s {
+            position: absolute;
+            bottom: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 11px;
+            color: var(--blueprint-text-muted);
+        }
+        
+        .compass-w {
+            position: absolute;
+            left: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 11px;
+            color: var(--blueprint-text-muted);
+        }
+        
+        /* Notes section */
+        .notes-section {
+            margin-top: 30px;
+            border: 2px solid var(--blueprint-border);
+            padding: 15px;
+            background: rgba(74, 123, 167, 0.03);
+        }
+        
+        .notes-title {
+            color: var(--blueprint-text);
+            font-size: 18px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+        
+        .notes-content {
+            color: var(--blueprint-text-muted);
+            font-size: 16px;
+            line-height: 1.8;
+        }
+        
+        /* Footer */
+        .blueprint-footer {
+            margin-top: 25px;
+            padding-top: 15px;
+            border-top: 2px solid var(--blueprint-border);
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            color: var(--blueprint-text-muted);
+            font-size: 13px;
+        }
+        
+        .footer-item {
+            text-align: center;
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            header {
+                min-height: 250px;
+            }
+            
+            header h1 {
+                font-size: 2rem;
+                letter-spacing: 2px;
+            }
+            
+            header p {
+                font-size: 1rem;
+            }
+            
+            footer {
+                padding: 2rem 1rem;
+            }
+            
+            footer p {
+                font-size: 14px;
+            }
+            
+            main {
+                padding: 10px;
+            }
+            body {
+                padding: 10px;
+            }
+            
+            .blueprint-container {
+                padding: 20px;
+            }
+            
+            .title-block {
+                grid-template-columns: 1fr;
+            }
+            
+            .project-title {
+                font-size: 20px;
+            }
+            
+            .subtitle {
+                font-size: 14px;
+            }
+            
+            .approval-line {
+                font-size: 12px;
+            }
+            
+            .house-outline {
+                grid-template-columns: 1fr;
+                grid-template-rows: repeat(6, auto);
+            }
+            
+            .room-content {
+                font-size: 16px;
+            }
+            
+            .north-arrow {
+                top: -90px;
+                right: 10px;
+                width: 60px;
+                height: 60px;
+            }
+            
+            .arrow-circle {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .dimension {
+                font-size: 12px;
+            }
+            
+            .notes-title {
+                font-size: 16px;
+            }
+            
+            .notes-content {
+                font-size: 14px;
+            }
+            
+            .blueprint-footer {
+                grid-template-columns: 1fr;
+                gap: 10px;
+                font-size: 11px;
+            }
+
+            nav {
+                gap: 1rem;
+                padding: 0.8rem;
+                flex-wrap: wrap;
+            }
+
+            .theme-toggle {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Property Buy Box</h1>
+        <p>Your guide to our investment criteria</p>
+    </header>
+	
+    <nav>
+        <a href="Stinsman.html">Home</a>
+        <a href="projects.html">Recent Projects</a>
+        <a href="pml.html">Private Lending</a>
+        <a href="Stinsman.html#contact">Contact</a>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+            <i class="fas fa-moon"></i>
+        </button>
+    </nav>	
+    
+    <main>
+    <div class="blueprint-container">
+        <div class="blueprint-header">
+            <div class="title-block">
+                <div class="title-info">
+                    <div class="project-title">Investment Property Criteria</div>
+                    <div class="subtitle">Buy Box Parameters - David & Deanna Stinsman</div>
+                </div>
+                <div class="approval-block">
+                    <div class="approval-line">SCALE: 1/4" = 1'-0"</div>
+                    <div class="approval-line">DWG NO: REI-001</div>
+                    <div class="approval-line">SHEET: 1 OF 1</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="house-plan">
+            <div class="north-arrow">
+                <div class="arrow-circle">
+                    <div class="arrow-n">N</div>
+                    <div class="arrow-pointer"></div>
+                </div>
+            </div>
+            
+            <div class="dimension dim-top">54'-0"</div>
+            <div class="dimension dim-left">36'-0"</div>
+            
+            <div class="house-outline" id="criteria">
+                <!-- Row 1 -->
+                <div class="room">
+                    <div class="doorway doorway-horizontal door-bottom"></div>
+                    <div class="doorway doorway-vertical door-right"></div>
+                    <div class="room-content">
+                        <div class="criteria-item">1-4 unit or Single Family Home</div>
+                    </div>
+                </div>
+                
+                <div class="room">
+                    <div class="doorway doorway-horizontal door-bottom"></div>
+                    <div class="room-content">
+                        <div class="criteria-item">West Pasco, West Hernando, or North Pinellas counties</div>
+                    </div>
+                </div>
+				
+                 <!-- Row 2 -->               
+                <div class="room">
+                    <div class="doorway doorway-horizontal door-bottom"></div>
+                    <div class="doorway doorway-vertical door-right"></div>
+                    <div class="room-content">
+                        <div class="criteria-item">No double-yellow line roads</div>
+                    </div>
+                </div>
+                
+                <div class="room">
+                    <div class="doorway doorway-horizontal door-bottom"></div>
+                    <div class="room-content">
+                        <div class="criteria-item">Light -> medium rehab level</div>
+                    </div>
+                </div>
+
+                <!-- Row 3 -->                
+                <div class="room">
+                    <div class="doorway doorway-vertical door-right"></div>
+                    <div class="room-content">
+                        <div class="criteria-item">No flood zone or flood damage</div>					
+                    </div>
+                </div>
+                
+                <div class="room">
+                    <div class="room-content"></div>
+                </div>
+                
+
+                <!-- Row 4 -->                
+                <div class="room">
+                    <div class="doorway doorway-vertical door-right"></div>
+                    <div class="room-content">
+                    </div>
+                </div>
+                
+                <div class="room">
+                    <div class="room-content"></div>
+                </div>
+
+            </div>
+            
+            <div class="dimension dim-bottom">54'-0"</div>
+            <div class="dimension dim-right">36'-0"</div>
+        </div>
+        
+        <div class="notes-section" id="notes">
+            <div class="notes-title">General Notes</div>
+            <div class="notes-content">
+                1. FIX 'n FLIP OR BRRRR<br>
+                2. B & C PROPERTIES PREFERRED<br>
+				3. SELLER FINANCING PREFERRED<br>
+                4. OFF-MARKET & DISTRESSED PREFERRED
+            </div>
+        </div>
+        
+        <div class="blueprint-footer">
+            <div class="footer-item">DRAWN BY: D. STINSMAN</div>
+            <div class="footer-item">CHECKED BY: _________</div>
+            <div class="footer-item">APPROVED BY: _________</div>
+        </div>
+    </div>
+    </main>
+    
+    <footer id="contact">
+       <p class="copyright">© 2025 David & Deanna Stinsman</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <script>
+        // Dark Mode Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const html = document.documentElement;
+        const icon = themeToggle.querySelector('i');
+
+        // Check for saved theme preference
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        html.setAttribute('data-theme', currentTheme);
+        icon.className = currentTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            icon.className = newTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>David & Deanna Stinsman – Creative solutions for your real estate challenge</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+  
+    :root {
+      --brand: #5888AA;
+      --accent: #A8A5FA;
+      --muted: #f5f7fa;
+      --text: #222;
+      --card: #fff;
+      --header-overlay: rgba(0,0,0,0.3);
+      --shadow: rgba(0,0,0,0.08);
+      --shadow-hover: rgba(88,136,170,0.15);
+    }
+
+    [data-theme="dark"] {
+      --muted: #1a1a1a;
+      --text: #e8e8e8;
+      --card: #2a2a2a;
+      --header-overlay: rgba(0,0,0,0.5);
+      --shadow: rgba(0,0,0,0.3);
+      --shadow-hover: rgba(168,165,250,0.2);
+    }
+	
+	body { 
+	  margin: 0; 
+	  padding: 0;
+	  font-family: 'Inter', sans-serif; 
+	  background: var(--muted);  /* Change from #FAFAFA */
+	  color: var(--text); 
+	  transition: background 0.3s ease, color 0.3s ease;  /* Add transition */
+	}
+
+    header {
+      transition: background 0.3s ease, color 0.3s ease;
+	  height: 100vh;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: white;
+      overflow: hidden;
+    }
+    header::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url('images/bg_banner_homereno14.webp') center/cover no-repeat;
+      z-index: -1;
+      transition: background-size 0.5s ease, background-position 0.5s ease;
+    }
+
+    /* Modes */
+    header.cover::after { background-size: cover; background-position: center; }
+    header.contain::after { background-size: contain; background-position: center top; background-color: #000; }
+    header.zoom110::after { background-size: 110%; background-position: center top; }
+
+    header h1 {
+      font-size: 3.2rem; font-weight: 700; margin: 0;
+	  text-shadow: 2px 2px 8px rgba(0,0,0,0.9), 0 0 25px rgba(0,0,0,0.9);
+    }
+    header p {
+      font-size: 1.5rem; margin-top: 1rem; font-weight: 500;
+	  text-shadow: 2px 2px 6px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,0.9);
+    }
+    .down-arrow {
+      position: absolute; bottom: 20px; font-size: 2.2rem; color: white;
+      text-decoration: none; animation: bounce 2s infinite;
+    }
+    @keyframes bounce {
+      0%,20%,50%,80%,100% { transform: translateY(0); }
+      40% { transform: translateY(8px); }
+      60% { transform: translateY(4px); }
+    }
+
+	nav {
+	  background: var(--card);  /* Change from #FAFAFF */
+	  display: flex;
+	  justify-content: center;
+	  align-items: center;  /* Add this line */
+	  gap: 2rem;
+	  padding: 0.8rem;
+	  box-shadow: 0 2px 5px var(--shadow);  /* Use variable */
+	  position: sticky;
+	  top: 0;
+	  z-index: 1000;
+	  transition: background 0.3s ease;  /* Add this line */
+	}
+
+	nav a {
+	  color: var(--brand);
+	  font-weight: 600;
+	  text-decoration: none;
+	  transition: color 0.2s ease, transform 0.2s ease;
+	  position: relative;
+	}
+
+	/* Underline animation */
+	nav a::after {
+	  content: '';
+	  position: absolute;
+	  bottom: -4px;
+	  left: 0;
+	  width: 0;
+	  height: 2px;
+	  background: var(--accent);
+	  transition: width 0.3s ease;
+	}
+
+	nav a:hover {
+	  color: var(--accent);
+	  transform: translateY(-2px);
+	}
+
+	nav a:hover::after {
+	  width: 100%;
+	}
+
+	section { 
+	  max-width: 1100px; 
+	  margin: 3rem auto; 
+	  padding: 0 1.5rem; 
+	  background: var(--card);  /* Add this */
+	  border-radius: 12px;  /* Add this for nice look */
+	  padding: 2rem;  /* Update padding */
+	  box-shadow: 0 4px 12px var(--shadow);  /* Add this */
+	}
+
+	section h2 {
+	  font-size: 1.8rem; 
+	  color: var(--brand);  /* Change from #5888AA */
+	  margin-bottom: 1rem;
+	  border-bottom: 2px solid var(--brand);  /* Change from #e0e0e0 */
+	  display: inline-block; 
+	  padding-bottom: 0.3rem;
+	}
+
+	section p {
+	  color: var(--text);  /* Add this */
+	}
+
+    section h2 {
+      font-size: 1.8rem; color: #5888AA; margin-bottom: 1rem;
+      border-bottom: 2px solid #e0e0e0; display: inline-block; padding-bottom: 0.3rem;
+    }
+
+    section ul {
+        padding-left: 1.5rem;
+		margin-left: 0.5rem;
+		list-style-type: disc;
+    }
+    section ul li {
+      margin-bottom: 0.8rem;
+    }
+    section ul li a {
+      display: flex; align-items: center; gap: 0.6rem;
+      color: inherit; text-decoration: none;
+    }
+    section ul li a i {
+      color: #5888AA; font-size: 1.2rem;
+    }
+
+	.cta {
+	  background: linear-gradient(to bottom right, #BDBCEB, #A8A5FA);
+	  color: white; 
+	  text-align: center; 
+	  padding: 2.5rem 1.5rem;
+	  margin: 3rem auto;  /* Change from '3rem 0' */
+	  max-width: 1100px;  /* Add this */
+	  border-radius: 10px;
+	}
+
+	.cta .btn-white {  /* Add this for the button */
+	  display: inline-block;
+	  background: white;
+	  color: var(--brand);
+	  padding: 0.8rem 1.5rem;
+	  border-radius: 8px;
+	  text-decoration: none;
+	  font-weight: 600;
+	  margin-top: 1rem;
+	  transition: all 0.3s ease;
+	}
+
+	.cta .btn-white:hover {
+	  transform: translateY(-2px);
+	  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+	}
+
+    footer {
+	  position: relative;
+	  color: var(--text);  /* Change from #111 */
+	  text-align: center;
+	  padding: 2rem 1.5rem;
+	  font-size: 0.95rem;
+	  overflow: hidden;
+	  min-height: 250px;
+	  background: var(--card);  
+	  transition: background 0.3s ease, color 0.3s ease;  
+      min-height: 250px; /* ensures enough vertical space for SOLD sign */
+    }
+	
+    footer::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url('images/bg_footer_sold04.webp') left center/contain no-repeat;
+      background-size: contain;
+      background-position: left center;
+      z-index: 0;
+      opacity: 0.75;
+    }
+    footer::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, rgba(255,255,255,0.3) 25%, rgba(255,255,255,0.5) 100%);
+      z-index: 1;
+    }
+    footer .footer-content {
+      position: relative;
+      z-index: 2;
+	  max-width: 1100px;
+	  margin: 0 auto;
+	}
+	footer .contact-info {
+	  margin-bottom: 2rem;
+	}
+	footer .contact-info h3 {
+	  font-size: 1.8rem;
+	  color: #5888AA;
+	  margin: 0 0 1.5rem 0;
+	  font-weight: 700;
+	  text-shadow: 1px 1px 3px rgba(255,255,255,0.8);
+	}
+	footer .contact-links {
+	  display: flex;
+	  flex-direction: column;
+	  gap: 0.8rem;
+	  list-style: none;
+	  padding: 0;
+	  margin: 0;
+	}
+	footer .contact-links li a {
+	  display: inline-flex;
+	  align-items: center;
+	  gap: 0.6rem;
+	  color: #333;
+	  text-decoration: none;
+	  font-weight: 600;
+	  background: rgba(255,255,255,0.9);
+	  padding: 0.7rem 1.3rem;
+	  border-radius: 8px;
+	  transition: all 0.3s ease;
+	  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+	  width: fit-content;
+	}
+	footer .contact-links li a:hover {
+	  background: rgba(255,255,255,1);
+	  transform: translateX(5px);
+	  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+	}
+	footer .contact-links li a i {
+	  color: #5888AA;
+	  font-size: 1.2rem;
+	}
+	footer .copyright {
+	  margin-top: 1rem;
+	  opacity: 0.8;
+	}
+
+    /* Dark Mode Toggle */
+    .theme-toggle {
+      margin-left: 1rem;
+      background: var(--brand);
+      color: white;
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px var(--shadow);
+    }
+
+    .theme-toggle:hover {
+      background: var(--accent);
+      transform: rotate(180deg) scale(1.1);
+      box-shadow: 0 4px 12px var(--shadow-hover);
+    }
+
+    .theme-toggle:active {
+      transform: rotate(180deg) scale(0.95);
+    }
+
+    /* Larger screens: SOLD anchored left, image fills */
+    @media (min-width: 769px) {
+      footer::before {
+        background-size: cover;
+        background-position: left center;
+      }
+    }
+
+    /* Smaller screens: show full SOLD sign */
+    @media (max-width: 768px) {
+      footer::before {
+        background-size: contain;
+        background-position: left top;
+      }
+    }
+
+    /* Mobile Responsiveness */
+    @media (max-width: 768px) {
+      header h1 { font-size: 2.4rem; }
+      header p { font-size: 1.2rem; }
+    }
+    @media (max-width: 480px) {
+      header h1 { font-size: 1.8rem; }
+      header p { font-size: 1rem; }
+    }
+	
+	/* Show the full header image on mobile */
+	@media (max-width: 768px) {
+	  header {
+		height: 50vh; /* adjusts vertical space so full image fits */
+	  }
+
+    /* Switcher (dev-only) */
+    .switcher {
+      display: none;
+      position: fixed; bottom: 20px; right: 20px;
+      background: var(--card); border: 1px solid #ccc; border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+      padding: 10px; flex-direction: column; gap: 8px;
+      font-size: 0.9rem; z-index: 2000;
+    }
+    .switcher button {
+      background: #5888AA; color: white; border: none;
+      padding: 6px 12px; border-radius: 5px; cursor: pointer; font-weight: 600;
+    }
+    .switcher button:hover { background: #2d7ebc; }
+  </style>
+</head>
+<body>
+  <header class="cover">
+    <h1 id="heroTitle">David & Deanna Stinsman</h1>
+    <p id="heroSubtitle">Creative solutions for your real estate challenges</p>
+    <a href="#about" class="down-arrow"><i class="fas fa-chevron-down"></i></a>
+  </header>
+
+  <nav>
+	<a href="projects.html">Recent Projects</a>
+	<a href="pml.html">Private Lending</a>
+	<a href="buybox.html">Buy Box</a>
+	<a href="#contact">Contact</a>
+	<button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+		<i class="fas fa-moon"></i>
+	</button> 
+  </nav>
+
+  <section id="about">
+    <h2>About Us</h2>
+    <p>
+      We are the Stinsmans, a husband-and-wife team dedicated to transforming properties 
+      in the Tampa Bay area and beyond. With a combined background in technology and real estate operations, we specialize in 
+      revitalizing homes through strategic renovations and smart investing. Our mission is simple; 
+      to create lasting value for homeowners and our community.
+    </p>
+  </section>
+
+  <section id="services">
+    <h2>Our Work</h2>
+    <p>
+      From flipping houses to building long-term rental portfolios, we approach each property with 
+      a focus on quality, sustainability, and attention to detail. Whether it’s breathing new life 
+      into a neglected home or creating passive income opportunities for our lending partners, we believe every home 
+      tells a story - a narrative in bricks and mortar. Have a look at our <a href="projects.html">recent projects</a>.
+    </p>
+  </section>
+  
+  <section id="partners">
+    <h2>Our Partners</h2>
+    <p>
+      We partner with private lenders to fund real estate investments secured by tangible assets. 
+	  <i>You</i> fund the deal, <i>we </i>secure the asset and execute the plan.
+	  Our approach is straightforward:
+		
+		<ul>
+		<li>We identify and secure the opportunity</li>
+		<li>We manage the renovation or stabilization</li>
+		<li>We execute a clear exit strategy</li>
+		</ul>
+
+	  <p>Our partners benefit from structured, asset-backed investments while we handle the day-to-day execution.
+	  We do the heavy lifting and our lenders enjoy returns secured by real estate assets, with clearly defined terms and exit strategies. 
+	  
+	<p>
+	  Interested in becoming a passive investor in our real estate projects? Check out the <a href="pml.html">private lending</a> journey to learn more.
+    </p>
+  </section>  
+
+  <div class="cta">
+    <h2>Looking to Sell Your Property?</h2>
+    <p>
+      We buy houses in any condition. Skip the repairs, the showings, and the hassle. 
+    </p>
+	  <a href="buybox.html" class="btn-white">See What We Buy</a>
+  </div>
+
+	<footer id="contact">
+	  <div class="footer-content">
+		<div class="contact-info">
+		  <h3>Contact Us</h3>
+		  <ul class="contact-links">
+			<li><a href="tel:8134746091"><i class="fas fa-phone"></i>813-474-6091</a></li>
+			<li><a href="mailto:hello@stinsman.com"><i class="fas fa-envelope"></i>hello@Stinsman.com</a></li>
+			<li><a href="URLPlaceholder" target="_blank"><i class="fas fa-house"></i>Deanna's Realtor Page</a></li>
+			<li><a href="https://www.facebook.com/david.stinsman.3" target="_blank"><i class="fab fa-facebook"></i>David's Facebook</a></li>
+		  </ul>
+		</div>
+		<p class="copyright">© 2025 David & Deanna Stinsman</p>
+	  </div>
+	</footer>
+
+  <div class="switcher" id="switcher">
+    <button onclick="setMode('cover')">Cover</button>
+    <button onclick="setMode('contain')">Contain</button>
+    <button onclick="setMode('zoom110')">110% Zoom</button>
+  </div>
+
+  <script>
+  // Dark Mode Toggle
+  const themeToggle = document.getElementById('themeToggle');
+  const html = document.documentElement;
+  const icon = themeToggle.querySelector('i');
+
+  // Check for saved theme preference
+  const currentTheme = localStorage.getItem('theme') || 'light';
+  html.setAttribute('data-theme', currentTheme);
+  icon.className = currentTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+
+  themeToggle.addEventListener('click', () => {
+    const currentTheme = html.getAttribute('data-theme');
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+    
+    html.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    icon.className = newTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+  });
+  
+    if (window.location.search.includes('dev=1')) {
+      document.getElementById('switcher').style.display = 'flex';
+    }
+    function setMode(mode) {
+      const header = document.querySelector('header');
+      header.classList.remove('cover','contain','zoom110');
+      header.classList.add(mode);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,800 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Font Awesome kit Stinsman FA Kit -->
+  <script src="https://kit.fontawesome.com/b7387cd8dd.js" crossorigin="anonymous"></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Private Money Lending – Stinsman Lending Journey</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --brand: #5888AA; 
+      --accent: #A8A5FA; 
+      --muted: #f5f7fa; 
+      --text: #222; 
+      --card: #fff;
+      --header-overlay: rgba(0,0,0,0.3);
+      --shadow: rgba(0,0,0,0.08);
+      --shadow-hover: rgba(88,136,170,0.15);
+    }
+
+    [data-theme="dark"] {
+      --muted: #1a1a1a;
+      --text: #e8e8e8;
+      --card: #2a2a2a;
+      --header-overlay: rgba(0,0,0,0.5);
+      --shadow: rgba(0,0,0,0.3);
+      --shadow-hover: rgba(168,165,250,0.2);
+    }
+    
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
+      color: var(--text);
+      background: var(--muted);
+      scroll-behavior: smooth;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+    
+    header {
+      background: url('images/bg_pml_stack12.png') center/cover no-repeat;
+	  height: 20vh;
+      min-height: 350px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+	
+    header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--header-overlay);
+      animation: pulse 8s ease-in-out infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
+    }
+    
+    header h1 {
+      position: relative;
+      z-index: 1;
+      margin: 0 0 1rem 0;
+      font-size: 2.8rem;
+      font-weight: 700;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    }
+    
+    header p {
+      position: relative;
+      z-index: 1;
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin: 0 1rem;
+      opacity: 0.95;
+    }
+    
+    nav {
+      background: var(--card);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      padding: 1rem;
+      box-shadow: 0 2px 10px var(--shadow);
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      transition: background 0.3s ease;
+    }
+    
+    nav a {
+      color: var(--brand);
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 0.2s ease, transform 0.2s ease;
+      position: relative;
+    }
+
+    /* Underline animation */
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: width 0.3s ease;
+    }
+    
+    nav a:hover { 
+      color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    /* Dark Mode Toggle */
+    .theme-toggle {
+      margin-left: 1rem;
+      background: var(--brand);
+      color: white;
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px var(--shadow);
+    }
+
+    .theme-toggle:hover {
+      background: var(--accent);
+      transform: rotate(180deg) scale(1.1);
+      box-shadow: 0 4px 12px var(--shadow-hover);
+    }
+
+    .theme-toggle:active {
+      transform: rotate(180deg) scale(0.95);
+    }
+
+    main {
+      max-width: 1400px;
+      margin: 3rem auto;
+      padding: 1rem 2rem 1rem 6rem;
+    }
+    
+    .intro {
+      background: var(--card);
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 3rem;
+      box-shadow: 0 10px 30px var(--shadow);
+      border: 1px solid rgba(88,136,170,0.1);
+      transition: background 0.3s ease;
+    }
+    
+    .intro h2 {
+      font-size: 1.8rem; color: #5888AA; margin-bottom: 1rem;
+      border-bottom: 2px solid #e0e0e0; display: inline-block; padding-bottom: 0.3rem;
+    }
+    
+    .intro p {
+      line-height: 1.7;
+      color: var(--text);
+      opacity: 0.85;
+    }
+
+    .timeline-container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 3.5rem;
+      padding: 2rem 0;
+    }
+    
+    .step-wrapper {
+      position: relative;
+    }
+    
+    .step-content {
+      width: 100%;
+    }
+    
+    .step-spacer {
+      display: none;
+    }
+    
+    .step-number {
+      position: absolute;
+      left: -30px;
+      top: 20px;
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, var(--brand), var(--accent));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 700;
+      font-size: 1.2rem;
+      box-shadow: 0 4px 15px rgba(88,136,170,0.4);
+      z-index: 10;
+      border: 3px solid var(--muted);
+    }
+    
+    .step {
+      background: var(--card);
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px var(--shadow);
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+    }
+    
+    .step:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px var(--shadow-hover);
+      border-color: var(--accent);
+    }
+    
+    .step-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .glyph {
+      width: 60px;
+      height: 60px;
+      flex-shrink: 0;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--accent), #d4d2ff);
+      box-shadow: 0 4px 12px rgba(168,165,250,0.3);
+    }
+    
+    .step h3 {
+      margin: 0;
+      font-size: 1.3rem;
+      color: var(--brand);
+      font-weight: 700;
+    }
+    
+    .meta {
+      color: var(--text);
+      opacity: 0.7;
+      font-size: 0.95rem;
+      margin: 0.5rem 0 1rem 0;
+      line-height: 1.5;
+    }
+    
+    .btn {
+      background: var(--brand);
+      color: white;
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-size: 0.9rem;
+    }
+    
+    .btn:hover {
+      background: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px var(--shadow-hover);
+    }
+    
+    .panel {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.22, 0.9, 0.3, 1);
+      margin-top: 0;
+    }
+    
+    .panel.open {
+      max-height: 500px;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 2px solid var(--muted);
+    }
+    
+    .panel p {
+      margin: 0;
+      line-height: 1.7;
+      color: var(--text);
+      opacity: 0.85;
+    }
+
+    .bottom-info {
+      margin-top: 4rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 0 2rem;
+    }
+    
+    .card {
+      background: var(--card);
+      padding: 2rem;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px var(--shadow);
+      border: 1px solid rgba(88,136,170,0.1);
+      transition: all 0.3s ease;
+    }
+    
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px var(--shadow-hover);
+    }
+    
+    .card h3 {
+      color: var(--brand);
+      margin: 0 0 1.5rem 0;
+      font-size: 1.4rem;
+      font-weight: 700;
+    }
+    
+    .calc-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+    
+    .calc-row input {
+      padding: 0.8rem;
+      border-radius: 8px;
+      border: 2px solid #e4e7ec;
+      font-size: 1rem;
+      transition: border-color 0.2s;
+      background: var(--card);
+      color: var(--text);
+    }
+    
+    .calc-row input:focus {
+      outline: none;
+      border-color: var(--brand);
+    }
+    
+    .button-row {
+      display: flex;
+      gap: 0.8rem;
+      margin-top: 1rem;
+    }
+    
+    #result {
+      margin-top: 1.5rem;
+      padding: 1rem;
+      background: var(--muted);
+      border-radius: 8px;
+      font-weight: 600;
+      color: var(--brand);
+    }
+    
+    .card ul {
+      margin: 0;
+      padding-left: 1.5rem;
+      line-height: 2;
+    }
+    
+    .card ul li {
+      color: var(--text);
+      opacity: 0.85;
+    }
+
+    footer {
+      text-align: center;
+      padding: 3rem 1.5rem;
+      color: var(--text);
+      background: var(--card);
+      margin-top: 4rem;
+      border-top: 1px solid #e4e7ec;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+    
+    .muted { 
+      color: var(--text); 
+      opacity: 0.7;
+    }
+    .small { font-size: 0.9rem; }
+
+    @media (max-width: 768px) {
+      header h1 { font-size: 2rem; }
+      header p { font-size: 1rem; }
+      
+      main {
+        padding: 1rem 1rem 1rem 4.5rem;
+      }
+      
+      .timeline-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      
+      .step-number {
+        left: -60px;
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+      }
+      
+      .bottom-info {
+        grid-template-columns: 1fr;
+        padding: 0 1rem;
+      }
+      
+      nav {
+        gap: 1rem;
+        padding: 0.8rem;
+        font-size: 0.9rem;
+        flex-wrap: wrap;
+      }
+
+      .theme-toggle {
+        margin-left: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Private Money Lending</h1>
+    <p>The journey to passive real estate investing</p>
+  </header>
+
+  <nav>
+    <a href="Stinsman.html">Home</a>
+	<a href="projects.html">Recent Projects</a>
+	<a href="buybox.html">Buy Box</a>
+        <a href="Stinsman.html#contact">Contact</a>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+      <i class="fas fa-moon"></i>
+    </button>
+  </nav>
+
+  <main>
+    <div class="intro">
+      <h2>Invest Passively in Real Estate</h2>
+      <p>Our investors earn income on real estate projects and renovations without ever picking up a hammer...because they own the financing. Backed by first-position liens and title protections, our private money lending program allows <b>you</b> to earn competitive returns while we handle all the work. 
+	  
+	  <br><br>We follow SEC regulatory guidelines for private placements. Under Rule 506(b) of Regulation D, we must establish a substantive relationship with potential investors before presenting specific investment opportunities. This means we need to understand your financial situation, investment experience, and goals before discussing any particular deal.
+
+	  <br><br>This educational page helps us begin that process. By learning about our approach and track record, and by reaching out to discuss your investment criteria, we can determine if private lending opportunities might be a good fit for you. Learn more about private placement rules at  <a href="https://www.sec.gov/resources-small-businesses/capital-raising-building-blocks/general-solicitation" target="_blank">SEC.gov</a>. 
+	  <br><br>Explore each step of our process below.</p>
+    </div>
+
+    <div class="timeline-container" id="journey">
+      <div class="step-wrapper">
+        <div class="step-number">1</div>
+        <div class="step-content">
+          <div class="step">
+            <div class="step-header">
+              <div class="glyph">
+				<i class="fas fa-people-arrows" style="font-size: 28px; color: white;"></i>
+              </div>
+              <h3>Build Rapport</h3>
+            </div>
+            <p class="meta">You meet our team and review our track record</p>
+            <button class="btn toggle" data-target="panel-1">Learn More</button>
+            <div class="panel" id="panel-1">
+              <p><strong>What we cover:</strong> Team introductions, our experience, risk evaluation process, sample case studies, and commitment to transparent communication.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-wrapper">
+        <div class="step-number">2</div>
+        <div class="step-content">
+          <div class="step">
+            <div class="step-header">
+              <div class="glyph">
+                <i class="fas fa-file-invoice-dollar" style="font-size: 28px; color: white;"></i>
+              </div>
+              <h3>Discuss Lending Options</h3>
+            </div>
+            <p class="meta">We Review rates, terms, LTV, and security</p>
+            <button class="btn toggle" data-target="panel-2">Learn More</button>
+            <div class="panel" id="panel-2">
+              <p>Clear presentation of terms, sample returns, interest accrual, first-position lien protection, title company escrow, and hazard insurance requirements.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-wrapper">
+        <div class="step-number">3</div>
+        <div class="step-content">
+          <div class="step">
+            <div class="step-header">
+              <div class="glyph">
+                <i class="fas fa-handshake" style="font-size: 28px; color: white;"></i>
+              </div>
+              <h3>PML Commitment</h3>
+            </div>
+            <p class="meta">Investor agrees to terms for private money lending</p>
+            <button class="btn toggle" data-target="panel-3">Learn More</button>
+            <div class="panel" id="panel-3">
+              <p>Commitment includes determining minimum loan amount and interest rate, expected hold period, fund acceptance process (wire to title), and documentation details.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-wrapper">
+        <div class="step-number">4</div>
+        <div class="step-content">
+          <div class="step">
+            <div class="step-header">
+              <div class="glyph">
+                <i class="fas fa-house-chimney" style="font-size: 28px; color: white;"></i>
+              </div>
+              <h3>Deal Identified</h3>
+            </div>
+            <p class="meta">We find a property that matches our criteria</p>
+            <button class="btn toggle" data-target="panel-4">Learn More</button>
+            <div class="panel" id="panel-4">
+              <p>Deal packet includes After Repair Value, purchase price, rehab estimate, timeline, exit plan, and conservative pro forma showing lender protections.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-wrapper">
+        <div class="step-number">5</div>
+        <div class="step-content">
+          <div class="step">
+            <div class="step-header">
+              <div class="glyph">
+                <i class="fas fa-user-check" style="font-size: 28px; color: white;"></i>
+              </div>
+              <h3>PML Selected</h3>
+            </div>
+            <p class="meta">Match deal to available investor</p>
+            <button class="btn toggle" data-target="panel-5">Learn More</button>
+            <div class="panel" id="panel-5">
+              <p>Selected lender reviews deal packet, confirms funding, and we coordinate timing for wiring and loan document preparation.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-wrapper">
+        <div class="step-number">6</div>
+        <div class="step-content">
+          <div class="step">
+            <div class="step-header">
+              <div class="glyph">
+                <i class="fas fa-file-contract" style="font-size: 28px; color: white;"></i>
+              </div>
+              <h3>Loan Docs Prepared</h3>
+            </div>
+            <p class="meta">Note, mortgage, title instructions</p>
+            <button class="btn toggle" data-target="panel-6">Learn More</button>
+            <div class="panel" id="panel-6">
+              <p>Documents drafted with clear terms, lender protections (first lien), and wiring instructions. Samples provided for review before closing.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-wrapper">
+        <div class="step-number">7</div>
+        <div class="step-content">
+          <div class="step">
+            <div class="step-header">
+              <div class="glyph">
+                <i class="fas fa-money-bill-transfer" style="font-size: 28px; color: white;"></i>
+              </div>
+              <h3>Funds Wired to Title</h3>
+            </div>
+            <p class="meta">Direct to escrow, through title company</p>
+            <button class="btn toggle" data-target="panel-7">Learn More</button>
+            <div class="panel" id="panel-7">
+              <p>Wiring to title ensures neutral third-party control. Title disburses per settlement statement so investor principal is properly secured.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-wrapper">
+        <div class="step-number">8</div>
+        <div class="step-content">
+          <div class="step">
+            <div class="step-header">
+              <div class="glyph">
+                <i class="fas fa-key" style="font-size: 28px; color: white;"></i>
+              </div>
+              <h3>Closing</h3>
+            </div>
+            <p class="meta">Mortgage recorded, interest starts accruing</p>
+            <button class="btn toggle" data-target="panel-8">Learn More</button>
+            <div class="panel" id="panel-8">
+              <p>Investor mortgage is recorded, settlement statements show distribution, and we immediately begin renovation per project timeline.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-wrapper">
+        <div class="step-number">9</div>
+        <div class="step-content">
+          <div class="step">
+            <div class="step-header">
+              <div class="glyph">
+                <i class="fas fa-hammer" style="font-size: 28px; color: white;"></i>
+              </div>
+              <h3>Renovation Process</h3>
+            </div>
+            <p class="meta">Weekly updates and tracking</p>
+            <button class="btn toggle" data-target="panel-9">Learn More</button>
+            <div class="panel" id="panel-9">
+              <p>Scheduled photo and change-order updates, budget tracking, and optional milestone inspections with frequent communication.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-wrapper">
+        <div class="step-number">10</div>
+        <div class="step-content">
+          <div class="step">
+            <div class="step-header">
+              <div class="glyph">
+                <i class="fas fa-chart-line" style="font-size: 28px; color: white;"></i>
+              </div>
+              <h3>Sale or Refinance</h3>
+            </div>
+            <p class="meta">Exit strategy executed</p>
+            <button class="btn toggle" data-target="panel-10">Learn More</button>
+            <div class="panel" id="panel-10">
+              <p>Property is either sold or refinanced to return capital to the investor. Lender principal and accrued interest are returned per loan terms.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-wrapper">
+        <div class="step-number">11</div>
+        <div class="step-content">
+          <div class="step">
+            <div class="step-header">
+              <div class="glyph">
+                <i class="fas fa-hand-holding-dollar" style="font-size: 28px; color: white;"></i>
+              </div>
+              <h3>Funds Returned + Interest</h3>
+            </div>
+            <p class="meta">Principal and interest wired to investor</p>
+            <button class="btn toggle" data-target="panel-11">Learn More</button>
+            <div class="panel" id="panel-11">
+              <p>Final wires issued by title at closing or by refinancing lender. We provide final accounting and PDF settlement statement for your records.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+	  
+      <div class="step-wrapper">
+        <div class="step-number">12</div>
+        <div class="step-content">
+          <div class="step">
+            <div class="step-header">
+              <div class="glyph">
+                <i class="fas fa-repeat" style="font-size: 28px; color: white;"></i>
+              </div>
+              <h3>Repeat</h3>
+            </div>
+            <p class="meta">Cycle through the process again</p>
+            <button class="btn toggle" data-target="panel-12">Learn More</button>
+            <div class="panel" id="panel-12">
+              <p>Upon completion of a successful project, you have the option to re-invest your capital into the next leg of our journey.</p>
+            </div>
+          </div>
+        </div>
+      </div>	  
+	  
+    </div>
+  </main>
+
+  <section class="bottom-info" id="calculator">
+    <div class="card">
+      <h3>Quick Return Calculator</h3>
+      <div class="calc-row">
+        <input id="amount" type="number" placeholder="Loan amount (e.g. 150000)" />
+        <input id="rate" type="number" placeholder="Annual rate % (e.g. 10)" />
+        <input id="term" type="number" placeholder="Term months (e.g. 6)" />
+      </div>
+      <div class="button-row">
+        <button class="btn" id="calc">Calculate</button>
+        <button class="btn" id="reset" style="background:#7a8fa8">Reset</button>
+      </div>
+      <div id="result">Projected returns will appear here.</div>
+    </div>
+
+    <div class="card" id="safety">
+      <h3>Safety Snapshot</h3>
+      <ul>
+        <li>First-position lien recorded</li>
+        <li>Title company escrow controls funds</li>
+        <li>Hazard insurance naming lender as mortgagee</li>
+        <li>Conservative LTV (Loan-to-Value)</li>
+		<li>Personal guaranty</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>Case Study</h3>
+		<span>(Approximate Figures)</span>
+      <p class="small"><strong>Loan:</strong> $120,000 
+		<br><strong>Term:</strong> 5 months
+		<br><strong>Rate:</strong> 10% APR
+		<br><strong>Interest:</strong> $5,000
+		<br><br><strong>Total Return:</strong> $125,000
+		<br><br><strong>Notes:</strong> First-lien recorded; title handled closing & disbursement of capital and interest to investor.
+	  </p>
+    </div>
+  </section>
+
+  <footer id="contact">
+    <p class="copyright">© 2025 David & Deanna Stinsman</p>
+  </footer>
+
+  <script>
+    // Dark Mode Toggle
+    const themeToggle = document.getElementById('themeToggle');
+    const html = document.documentElement;
+    const icon = themeToggle.querySelector('i');
+
+    // Check for saved theme preference
+    const currentTheme = localStorage.getItem('theme') || 'light';
+    html.setAttribute('data-theme', currentTheme);
+    icon.className = currentTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = html.getAttribute('data-theme');
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+      
+      html.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      icon.className = newTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+    });
+
+    // Existing toggle functionality
+    document.querySelectorAll('.toggle').forEach(btn => {
+      btn.addEventListener('click', e => {
+        const id = btn.dataset.target;
+        const panel = document.getElementById(id);
+        const open = panel.classList.contains('open');
+        document.querySelectorAll('.panel.open').forEach(p => p.classList.remove('open'));
+        if(!open) panel.classList.add('open');
+      });
+    });
+
+    function calcReturn() {
+      const amount = parseFloat(document.getElementById('amount').value) || 0;
+      const rate = parseFloat(document.getElementById('rate').value) || 0;
+      const term = parseFloat(document.getElementById('term').value) || 0;
+      if(!amount || !rate || !term) {
+        document.getElementById('result').innerText = 'Enter amount, rate, and term to calculate.';
+        return;
+      }
+      const interest = amount * (rate/100) * (term/12);
+      const total = amount + interest;
+      document.getElementById('result').innerHTML = `<strong>Interest:</strong> $${interest.toLocaleString(undefined,{maximumFractionDigits:2})} <br><strong>Total returned:</strong> $${total.toLocaleString(undefined,{maximumFractionDigits:2})}`;
+    }
+    
+    document.getElementById('calc').addEventListener('click', calcReturn);
+    document.getElementById('reset').addEventListener('click', () => {
+      document.getElementById('amount').value = '';
+      document.getElementById('rate').value = '';
+      document.getElementById('term').value = '';
+      document.getElementById('result').innerText = 'Projected returns will appear here.';
+    });
+  </script>
+</body>
+</html>
